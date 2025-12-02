@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flux</title>
+   
+
+    <style>
+        .container{
+            background-color: rgb(155, 52, 79);
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgb(28, 2, 2);
+            margin: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content:center;
+            background-color: rgb(58, 225, 237);
+            box-shadow: 8px 20px 20px rgb(239, 91, 91);
+        }
+
+        body{
+            background-color: rgb(235, 217, 190);
+        }
+
+        .con2{
+            display: flex;
+            justify-content: stretch;
+        }
+    </style>
+
+</head>
+<body>
+    <details>
+        <summary>Source 1</summary>
+        <div class="container">
+        <div class="box">item-1</div>
+        <div class="box">item-2</div>
+        <div class="box">item-3</div>
+        <div class="box">item-4</div>
+        <div class="box">item-5</div>
+        <div class="box">item-6</div>
+        <div class="box">item-7</div>
+       </details>
+       <details>
+        <summary>Source 2</summary>
+        <div class="container con2">
+        <div class="box">item-1</div>
+        <div class="box">item-2</div>
+        <div class="box">item-3</div>
+        <div class="box">item-4</div>
+        <div class="box">item-5</div>
+        <div class="box">item-6</div>
+        <div class="box">item-7</div>    
+       </details>
+        </div>
+</body>
+</html>
