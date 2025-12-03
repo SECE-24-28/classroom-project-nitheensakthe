@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Implementation</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .container { text-align: center; }
+        input, button { padding: 10px; margin: 5px; font-size: 16px; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        .stack-display { border: 2px solid #ccc; min-height: 200px; margin: 20px 0; padding: 10px; }
+        .stack-item { background: #f8f9fa; border: 1px solid #dee2e6; padding: 8px; margin: 2px 0; }
+        .info { margin: 10px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stack Data Structure</h1>
+        
+        <div>
+            <input type="text" id="stackInput" placeholder="Enter value">
+            <button onclick="push()">Push</button>
+            <button onclick="pop()">Pop</button>
+            <button onclick="peek()">Peek</button>
+            <button onclick="clear()">Clear</button>
+        </div>
+        
+        <div class="info">
+            <span>Size: <span id="size">0</span></span> | 
+            <span>Top: <span id="top">Empty</span></span>
+        </div>
+        
+        <div class="stack-display" id="stackDisplay">
+            <em>Stack is empty</em>
+        </div>
+    </div>
+
+    <script>
+        class Stack {
+            constructor() { this.items = []; }
+            push(element) { this.items.push(element); }
+            pop() { return this.items.length === 0 ? null : this.items.pop(); }
+            peek() { return this.items.length === 0 ? null : this.items[this.items.length - 1]; }
+            isEmpty() { return this.items.length === 0; }
+            size() { return this.items.length; }
+            clear() { this.items = []; }
+        }
+
+        const stack = new Stack();
+
+        function updateDisplay() {
+            const display = document.getElementById('stackDisplay');
+            const sizeSpan = document.getElementById('size');
+            const topSpan = document.getElementById('top');
+            
+            sizeSpan.textContent = stack.size();
+            topSpan.textContent = stack.isEmpty() ? 'Empty' : stack.peek();
+            
+            if (stack.isEmpty()) {
+                display.innerHTML = '<em>Stack is empty</em>';
+            } else {
+                display.innerHTML = stack.items.slice().reverse().map(item => 
+                    `<div class="stack-item">${item}</div>`
+                ).join('');
+            }
+        }
+
+        function push() {
+            const input = document.getElementById('stackInput');
+            const value = input.value.trim();
+            if (value) {
+                stack.push(value);
+                input.value = '';
+                updateDisplay();
+            }
+        }
+
+        function pop() {
+            const popped = stack.pop();
+            if (popped !== null) {
+                alert(`Popped: ${popped}`);
+                updateDisplay();
+            } else {
+                alert('Stack is empty!');
+            }
+        }
+
+        function peek() {
+            const top = stack.peek();
+            alert(top !== null ? `Top element: ${top}` : 'Stack is empty!');
+        }
+
+        function clear() {
+            stack.clear();
+            updateDisplay();
+        }
+
+        document.getElementById('stackInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') push();
+        });
+
+        updateDisplay();
+    </script>
+</body>
+</html>
