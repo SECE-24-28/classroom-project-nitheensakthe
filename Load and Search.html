@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load and Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <button class="mx-auto block mt-10 px-4 py-2 bg-blue-500 text-white rounded" id="ld">Load Users</button>
+    <input type="text" placeholder="Search by title" id="ip">
+
+
+    <div class="res"></div>
+
+    <script>
+        let ld = document.getElementById("ld");
+        let data = [ {title:"one", email:"abc@gmail.com", City:"New York"},
+                    {title:"two", email:"abc2@outlook.com", City:"england"},
+                    {title:"three", email:"abc3@gmail.com", City:"Moscow"},
+                    {title:"four", email:"abc4@outlook.com", City:"germany"},
+                    {title:"five", email:"abc5@gmail.com", City:"India"},
+                    {title:"six", email:"abc6@outlook.com", City:"japan"}
+                    ];
+
+        ld.addEventListener("click", function(){
+            var p = document.createElement("p");
+            for(let i = 0; i < data.length; i++){
+                var p = document.createElement("p");
+                p.innerHTML = `<div class='border-2 border-gray-400 m-2 mx-16 p-2 rounded-lg shadow-lg'>
+                                <h2 class='text-2xl font-bold mb-2'>${data[i].title}</h2>
+                                <p class='text-gray-700'><b>Email:</b> ${data[i].email}</p>
+                                <p class='text-gray-700'> <b>City:</b> ${data[i].City}</p>
+                               </div>`;
+                document.querySelector(".res").appendChild(p);
+            }
+        });
+
+        let ip = document.getElementById("ip");
+        ip.addEventListener("keyup", function(){
+            let searchValue = ip.value.toLowerCase();
+            document.querySelector(".res").innerHTML = ""; 
+            for(let i = 0; i < data.length; i++){
+                if(data[i].title.toLowerCase().includes(searchValue)){
+                    var p = document.createElement("p");
+                    p.innerHTML = `<div class='border-2 border-gray-400 m-2 mx-16 p-2 rounded-lg shadow-lg'>
+                                    <h2 class='text-2xl font-bold mb-2'>${data[i].title}</h2>
+                                    <p class='text-gray-700'><b>Email:</b> ${data[i].email}</p>
+                                    <p class='text-gray-700'> <b>City:</b> ${data[i].City}</p>
+                                   </div>`;
+                    document.querySelector(".res").appendChild(p);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

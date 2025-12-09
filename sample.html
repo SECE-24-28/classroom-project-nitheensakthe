@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Array Methods Demo</h1>
+  <div id="output"></div>
+  <button onclick="showArray()">Show Array</button>
+  <button onclick="addItem()">Add Item</button>
+  <button onclick="removeItem()">Remove Last</button>
+  <button onclick="searchItem()">Search</button>
+  
+  <script>
+    let st=["😒Sasi😒","😒Sasj😒","😒Sask😒","😒Sasl😒","😒Sasm😒"];
+    let output = document.getElementById('output');
+
+    function showArray(){
+      output.innerHTML = "<h3>Current Array:</h3>";
+      for(let i=0;i<st.length;i++){
+        output.innerHTML += st[i] + "<br>";
+      }
+      output.innerHTML += "<p>Length: " + st.length + "</p>";
+    }
+
+    function addItem(){
+      let newItem = prompt("Enter new item:");
+      if(newItem) {
+        st.push("😒" + newItem + "😒");
+        showArray();
+      }
+    }
+
+    function removeItem(){
+      if(st.length > 0){
+        st.pop();
+        showArray();
+      }
+    }
+
+    function searchItem(){
+      let search = prompt("Search for:");
+      let found = st.find(item => item.includes(search));
+      output.innerHTML = found ? "Found: " + found : "Not found";
+    }
+
+    showArray();
+  </script>
+</body>
+</html>
