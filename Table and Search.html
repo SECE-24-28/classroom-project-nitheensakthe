@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load and Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <button class="mx-auto block mt-10 px-4 py-2 bg-blue-500 text-white rounded" id="ld">Load Users</button>
+    <input type="text" placeholder="Search by title" class="mt-4 mx-auto block px-4 py-2 border rounded" id="ip">
+
+    <div class="res mt-4"></div>
+
+    <script>
+        let ld = document.getElementById("ld");
+        let data = [ {title:"one", email:"abc@gmail.com", City:"New York"},
+                    {title:"two", email:"abc2@outlook.com", City:"england"},
+                    {title:"three", email:"abc3@gmail.com", City:"Moscow"},
+                    {title:"four", email:"abc4@outlook.com", City:"germany"},
+                    {title:"five", email:"abc5@gmail.com", City:"India"},
+                    {title:"six", email:"abc6@outlook.com", City:"japan"}
+                    ];
+
+        ld.addEventListener("click", function(){
+            let table = `<table class='w-full mx-auto mt-4 border-collapse border border-gray-400'>
+                        <thead>
+                            <tr class='bg-gray-200'>
+                                <th class='border border-gray-400 px-4 py-2'>Title</th>
+                                <th class='border border-gray-400 px-4 py-2'>Email</th>
+                                <th class='border border-gray-400 px-4 py-2'>City</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+            for(let i = 0; i < data.length; i++){
+                table += `<tr>
+                            <td class='border border-gray-400 px-4 py-2'>${data[i].title}</td>
+                            <td class='border border-gray-400 px-4 py-2'>${data[i].email}</td>
+                            <td class='border border-gray-400 px-4 py-2'>${data[i].City}</td>
+                          </tr>`;
+            }
+            table += `</tbody></table>`;
+            document.querySelector(".res").innerHTML = table;
+        });
+
+        let ip = document.getElementById("ip");
+        ip.addEventListener("keyup", function(){
+            let searchValue = ip.value.toLowerCase();
+            let table = `<table class='w-full mx-auto mt-4 border-collapse border border-gray-400'>
+                        <thead>
+                            <tr class='bg-gray-200'>
+                                <th class='border border-gray-400 px-4 py-2'>Title</th>
+                                <th class='border border-gray-400 px-4 py-2'>Email</th>
+                                <th class='border border-gray-400 px-4 py-2'>City</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+            let found = false;
+            for(let i = 0; i < data.length; i++){
+                if(data[i].title.toLowerCase().includes(searchValue)){
+                    table += `<tr>
+                                <td class='border border-gray-400 px-4 py-2'>${data[i].title}</td>
+                                <td class='border border-gray-400 px-4 py-2'>${data[i].email}</td>
+                                <td class='border border-gray-400 px-4 py-2'>${data[i].City}</td>
+                              </tr>`;
+                    found = true;
+                }
+            }
+            table += `</tbody></table>`;
+            document.querySelector(".res").innerHTML = found ? table : "<p class='text-center mt-4'>No results found</p>";
+        });
+    </script>
+</body>
+</html>
